@@ -53,16 +53,25 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, Ref, onMounted, onUnmounted } from 'vue';
 import BInput from '../baseComponents/BInput.vue';
 
-const searchOptions = ref({
+type SearchOptions = {
+  searchQuery: string;
+  checkInDate: string;
+  checkOutDate: string;
+  rooms: number;
+  accommodates: number;
+};
+
+const searchOptions: Ref<SearchOptions> = ref({
   searchQuery: '',
   checkInDate: '',
   checkOutDate: '',
-  rooms: 1,
-  accommodates: 1,
+  rooms: 0,
+  accommodates: 0,
 });
+
 const isShowingOptions = ref(false);
 const formSearchHotelsRef = ref<HTMLFormElement | null>(null);
 
@@ -79,7 +88,6 @@ const handleClickOutside = (event: MouseEvent) => {
     formSearchHotelsRef.value &&
     !formSearchHotelsRef.value.contains(event.target as Node)
   ) {
-    searchHotels();
     isShowingOptions.value = false;
   }
 };
