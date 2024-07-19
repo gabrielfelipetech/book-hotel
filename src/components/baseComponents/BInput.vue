@@ -1,4 +1,38 @@
 <template>
-  <div>teste</div>
+  <div>
+    <label
+      :for="labelText"
+      :style="{ display: showLabel ? 'block' : 'none' }"
+      >{{ labelText }}</label
+    >
+    <input
+      :id="labelText"
+      v-model="inputValue"
+      @input="emitValue"
+      v-bind="$attrs"
+    />
+  </div>
 </template>
-<script lang="ts" setup></script>
+
+<script setup>
+import { ref, defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+  showLabel: {
+    type: Boolean,
+    required: true,
+  },
+  labelText: {
+    type: String,
+    required: true,
+  },
+});
+
+const inputValue = ref('');
+
+const emit = defineEmits(['update:modelValue']);
+
+const emitValue = () => {
+  emit('update:modelValue', inputValue.value);
+};
+</script>
