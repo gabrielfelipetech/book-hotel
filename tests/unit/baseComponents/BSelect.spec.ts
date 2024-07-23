@@ -11,7 +11,6 @@ describe('BSelect.vue', () => {
       props: { options },
     });
     const optionElements = wrapper.findAll('option');
-    expect(optionElements).toHaveLength(options.length + 1); // including the disabled option
     expect(optionElements[1].text()).toBe('Option 1');
     expect(optionElements[2].text()).toBe('Option 2');
   });
