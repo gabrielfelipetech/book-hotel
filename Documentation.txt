@@ -1,0 +1,24 @@
+Bem, detalhando um pouco sobre as escolhas de design e arquitetura.
+
+Sobre a parte de design eu escolhi algo mais comum, como vemos 
+no mercado, gostaria de ter feito animações padronizado cores, espaçamentos, 
+tamanhos de elementos como botões, card, imagens e outros. Já que é possivel de fazer, a questão é que leva tempo.
+
+sobre a parte de arquitetura eu optei por criar componenentes base justamente para seguir essa linha de padronização.
+Então eles recebem como props seus atributos de estilo, label, e outros e emitem algum valor como click ou a opção selecionada.
+passando para o shared o ideal é que seja:
+sharedComponents 
+- hotel
+-- cardHotel.vue
+-- cardListHotel.vue
+-- hotelList.vue
+-global
+--HeaderHotel.vue
+--userMenu.vue
+--inputSearch.vue
+e outros, isso pensando em escalabilidade e manutenção, assim separaria tambem por responsabilidade.
+
+as rotas eu decidi modularizar justamente por questões de escalabilidade e manutenção, o mesmo servo para a store com Pinia.
+se for uma aplicação que não sera somente sobre hoteis, mas que haja aluguel de carros, casas, ou até mesmo mais features, vale a pena
+esse tipo de abordagem.
+

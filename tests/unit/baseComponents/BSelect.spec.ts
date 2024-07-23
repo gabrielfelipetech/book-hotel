@@ -1,4 +1,3 @@
-// BSelect.spec.ts
 import { shallowMount } from '@vue/test-utils';
 import BSelect from '@/components/baseComponents/BSelect.vue';
 

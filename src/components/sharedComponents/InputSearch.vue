@@ -62,11 +62,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, onMounted, onUnmounted } from 'vue';
+import { ref, Ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue';
 import BButton from '@/components/baseComponents/BButton.vue';
-import BInput from '@/components/baseComponents/BInput.vue';
 import useHotelStore from '@/stores/hotel';
 
+const BInput = defineAsyncComponent(
+  () => import('@/components/baseComponents/BInput.vue'),
+);
 type SearchOptions = {
   searchQuery: string;
   checkInDate: string;

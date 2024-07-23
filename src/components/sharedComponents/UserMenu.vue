@@ -21,9 +21,7 @@
       <ul v-if="isShowingMenu" class="bg-white">
         <li v-for="configuration in configurations" :key="configuration.name">
           <router-link class="text-lg" :to="configuration.path">
-            {{
-              configuration.name
-            }}
+            {{ configuration.name }}
           </router-link>
         </li>
         <li>
@@ -39,9 +37,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import BButton from '@/components/baseComponents/BButton.vue';
+import { computed, defineAsyncComponent, ref } from 'vue';
 
+const BButton = defineAsyncComponent(
+  () => import('@/components/baseComponents/BButton.vue'),
+);
 const isLogged = ref(false);
 const configurations = computed(() => [
   { name: 'Reservas', path: '/reservations' },

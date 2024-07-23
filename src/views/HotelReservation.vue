@@ -75,15 +75,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, defineAsyncComponent } from 'vue';
 import CardHotel from '@/components/sharedComponents/CardHotel.vue';
 import useHotelStore from '@/stores/hotel';
 import { Hotel } from '@/stores/hotel/types';
-import BInput from '@/components/baseComponents/BInput.vue';
-import BSelect from '@/components/baseComponents/BSelect.vue';
-import BButton from '@/components/baseComponents/BButton.vue';
 import { useRouter } from 'vue-router';
 
+const BButton = defineAsyncComponent(
+  () => import('@/components/baseComponents/BButton.vue'),
+);
+const BInput = defineAsyncComponent(
+  () => import('@/components/baseComponents/BInput.vue'),
+);
+const BSelect = defineAsyncComponent(
+  () => import('@/components/baseComponents/BSelect.vue'),
+);
 type ReservationValues = {
   name: string;
   phone: number;

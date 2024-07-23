@@ -8,11 +8,14 @@
         @update:selected="handleSelectionFilter"
       />
       <p v-if="loading">Carregando...</p>
-      <div v-else class="w-full">
+      <div v-else class="w-full flex flex-col">
         <BButton
           v-if="cardHotelsSelectedForCompare.length"
           button-text="Comparar"
           color="primary"
+          height="10"
+          width="full"
+          class="mx-auto mb-2"
           @click="compareHotels"
         />
         <CardListHotel
@@ -27,15 +30,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, ref, watch } from 'vue';
+import { computed, defineAsyncComponent, defineProps, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import useHotelStore from '@/stores/hotel';
-import BButton from '@/components/baseComponents/BButton.vue';
 import { useRoute } from 'vue-router';
 import { Hotel } from '@/stores/hotel/types';
 import BSelect from '@/components/baseComponents/BSelect.vue';
 import CardListHotel from './CardListHotel.vue';
 
+const BButton = defineAsyncComponent(
+  () => import('@/components/baseComponents/BButton.vue'),
+);
 const route = useRoute();
 const options = computed(() => [
   { name: 'Mais barato', value: 'cheapest' },

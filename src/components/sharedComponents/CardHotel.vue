@@ -20,7 +20,7 @@
       <p>Check-in: {{ cardHotel.availableCheckIn }}</p>
       <p>check-out: {{ cardHotel.availableCheckOut }}</p>
       <label v-if="isSelectable">
-        <input v-model="selected" type="checkbox" @change="emitSelection">
+        <input v-model="selected" type="checkbox" @change="emitSelection" />
         Comparar
       </label>
       <BButton
@@ -36,13 +36,21 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, defineProps, defineEmits, ref } from 'vue';
+import {
+  computed,
+  defineProps,
+  defineEmits,
+  ref,
+  defineAsyncComponent,
+} from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { Hotel } from '@/stores/hotel/types';
 import useHotelStore from '@/stores/hotel';
 import BImage from '../baseComponents/BImage.vue';
-import BButton from '../baseComponents/BButton.vue';
 
+const BButton = defineAsyncComponent(
+  () => import('../baseComponents/BButton.vue'),
+);
 const props = defineProps<{
   cardHotel: Hotel;
   isSelectable: boolean;
