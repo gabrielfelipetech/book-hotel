@@ -1,21 +1,36 @@
 <template>
   <div class="">
-    <div v-if="!isLogged" class="w-min ml-auto">
-      <BButton button-text="Entrar" color="primary" @click="logUser(true)" />
+    <div v-if="!isLogged" class="w-auto ml-auto">
+      <BButton
+        button-text="Entrar"
+        color="primary"
+        height="10"
+        width="full"
+        @click="logUser(true)"
+      />
     </div>
-    <div v-if="isLogged" class="w-min ml-auto">
-      <BButton button-text="Usuário" color="secondary" @click="showMenu" />
+    <div v-if="isLogged" class="w-auto ml-auto">
+      <BButton
+        button-text="Usuário"
+        color="secondary"
+        height="10"
+        width="full"
+        @click="showMenu"
+      />
 
       <ul v-if="isShowingMenu" class="bg-white">
         <li v-for="configuration in configurations" :key="configuration.name">
-          <router-link :to="configuration.path">{{
-            configuration.name
-          }}</router-link>
+          <router-link class="text-lg" :to="configuration.path">
+            {{
+              configuration.name
+            }}
+          </router-link>
         </li>
         <li>
           <BButton
             button-text="sair"
             color="secondary"
+            width="full"
             @click="logUser(false)"
           />
         </li>

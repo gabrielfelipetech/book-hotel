@@ -2,27 +2,33 @@
   <div class="card">
     <div class="card-content">
       <BImage
-        :imageProps="{
+        class="h-min"
+        :image-props="{
           src: cardHotel.image,
           alt: cardHotel.name,
-          style: 'h-24',
         }"
       />
       <h2>Nome: {{ cardHotel.name }}</h2>
       <p>Localização: {{ cardHotel.location }}</p>
-      <p>Descrição: {{ cardHotel.descriptionType }}</p>
+      <p v-if="isCurrentRouteHotelReservation">
+        Descrição: {{ cardHotel.descriptionType }}
+      </p>
       <p>Preço: {{ cardHotel.price }}</p>
       <p>Nota: {{ cardHotel.rating }}</p>
       <p>Quartos: {{ cardHotel.rooms }}</p>
       <p>Pessoas: {{ cardHotel.accommodates }}</p>
+      <p>Check-in: {{ cardHotel.availableCheckIn }}</p>
+      <p>check-out: {{ cardHotel.availableCheckOut }}</p>
       <label v-if="isSelectable">
-        <input type="checkbox" v-model="selected" @change="emitSelection" />
+        <input v-model="selected" type="checkbox" @change="emitSelection">
         Comparar
       </label>
       <BButton
         v-if="!isCurrentRouteHotelReservation"
         :button-text="buttonLabel"
         color="primary"
+        height="10"
+        width="full"
         @click="goToHotelReserveOrDetails"
       />
     </div>
@@ -70,8 +76,9 @@ const emitSelection = () => {
 
 <style scoped lang="scss">
 .card {
+  @apply bg-white;
   .card-content {
-    @apply flex flex-col gap-2 px-2;
+    @apply flex flex-col gap-2 p-2 shadow-xl rounded-lg;
   }
 }
 </style>

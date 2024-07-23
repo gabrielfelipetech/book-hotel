@@ -1,7 +1,11 @@
 <template>
   <div class="w-full h-full flex flex-col">
     <HeaderHotel />
-    <HotelList hotels-type="total" :is-comparable="true" />
+    <HotelList
+      hotels-type="total"
+      :is-comparable="true"
+      class="bg-slate-50 py-4"
+    />
   </div>
 </template>
 

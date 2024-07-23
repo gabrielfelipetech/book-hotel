@@ -1,7 +1,8 @@
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full bg-slate-50">
     <div>
       <HotelList
+        class="py-10"
         title="Hotéis reservados"
         hotels-type="reserved"
         :is-comparable="false"

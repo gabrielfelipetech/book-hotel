@@ -1,5 +1,5 @@
 <template>
-  <img :src="imageProps.src" :alt="imageProps.alt" :class="imageProps.style" />
+  <img :src="imageProps.src" :alt="imageProps.alt" :class="imageProps.style">
 </template>
 <script lang="ts" setup>
 import { defineProps } from 'vue';

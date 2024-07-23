@@ -4,13 +4,12 @@
     class="h-auto w-full mx-auto"
     @submit.prevent="searchHotels"
   >
-    <div class="w-2/4 mx-auto">
-      <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
+    <div class="w-3/4 mx-auto rounded-lg">
       <BInput
         v-model="searchOptions.searchQuery"
         type="text"
         placeholder="Pesquise por localização"
-        class="bg-slate-200 w-full"
+        class="bg-slate-200 w-full h-10 rounded-lg pl-2"
         :show-label="false"
         label-text="pesquisar por localização"
         @click="showOptions"
@@ -22,7 +21,10 @@
         class="hidden"
       />
 
-      <div v-if="isShowingOptions" class="bg-white flex w-full">
+      <div
+        v-if="isShowingOptions"
+        class="bg-white flex w-full mt-2 flex-col lg:flex-row"
+      >
         <BInput
           v-model="searchOptions.checkInDate"
           type="date"
@@ -30,6 +32,7 @@
           label-text="Check-in"
           class="w-full"
         />
+
         <BInput
           v-model="searchOptions.checkOutDate"
           type="date"

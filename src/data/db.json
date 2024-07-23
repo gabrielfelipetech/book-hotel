@@ -4,7 +4,7 @@
       "id": "1",
       "name": "Hotel 1",
       "location": "location 2",
-      "reserved": false,
+      "reserved": true,
       "price": 238,
       "rating": 8.5,
       "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267",

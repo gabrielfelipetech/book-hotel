@@ -21,6 +21,7 @@ import UserMenu from '@/components/sharedComponents/UserMenu.vue';
 </script>
 <style scoped>
 .header {
-  @apply h-28 w-full bg-black flex flex-row justify-between p-4 items-center;
+  @apply min-h-40 w-full bg-black flex gap-4;
+  @apply justify-between p-4 items-center flex-col lg:flex-row lg:gap-0;
 }
 </style>

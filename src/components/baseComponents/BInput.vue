@@ -3,14 +3,13 @@
     <label
       :for="labelText"
       :style="{ display: showLabel ? 'block' : 'none' }"
-      >{{ labelText }}</label
-    >
+    >{{ labelText }}</label>
     <input
       :id="labelText"
       v-model="inputValue"
       v-bind="$attrs"
       @input="emitValue"
-    />
+    >
   </div>
 </template>
 
