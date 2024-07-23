@@ -14,7 +14,9 @@ export type Hotel = {
   availableCheckOut: string;
 };
 export type StateHotel = {
-  hotels: Hotel[];
+  originalHotels: Hotel[];
+  refinedHotels: Hotel[];
+  selectedHotel: Hotel;
   loading: boolean;
   error: string | null;
 };

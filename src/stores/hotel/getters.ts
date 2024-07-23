@@ -1,7 +1,10 @@
 import { StateHotel } from './types';
 
 export const getters = {
-  reservedHotels(state: StateHotel) {
-    return state.hotels.filter(hotel => hotel.reserved);
+  allHotels(state: StateHotel) {
+    return state.originalHotels;
+  },
+  allRefinedHotels(state: StateHotel) {
+    return state.refinedHotels;
   },
 };
