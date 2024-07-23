@@ -13,7 +13,11 @@ module.exports = {
     ecmaVersion: 2020,
   },
   rules: {
-    'operator-linebreak': ['error', 'after'],
+    'no-confusing-arrow': 'off',
+    'implicit-arrow-linebreak': 'off',
+    'function-paren-newline': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
+    'object-curly-newline': ['error', { multiline: true, consistent: true }],
     'vue/script-setup-uses-vars': 'error',
     'import/newline-after-import': ['error', { count: 1 }],
     'vue/max-attributes-per-line': [
@@ -22,10 +26,12 @@ module.exports = {
         singleline: 3,
         multiline: {
           max: 1,
-          allowFirstLine: false,
         },
       },
     ],
+    'vuejs-accessibility/label-has-for': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
+    'operator-linebreak': 'off',
     'import/prefer-default-export': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
