@@ -1,9 +1,23 @@
 <template>
-  <div v-if="tete">
-    <h1 class="bg-blue-500">Home Hotel</h1>
+  <div class="w-full h-full">
+    <div>
+      <HotelList
+        title="Hotéis reservados"
+        hotels-type="reserved"
+        :is-comparable="false"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const tete = true;
+import HotelList from '@/components/sharedComponents/HotelList.vue';
+import useHotelStore from '@/stores/hotel';
+import { onMounted } from 'vue';
+
+const hotelStore = useHotelStore();
+
+onMounted(() => {
+  hotelStore.getReservedHotels();
+});
 </script>
