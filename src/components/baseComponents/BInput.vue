@@ -17,7 +17,7 @@
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue';
 
-const props = defineProps({
+defineProps({
   showLabel: {
     type: Boolean,
     required: true,
