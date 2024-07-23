@@ -9,41 +9,47 @@
       <BInput
         v-model="searchOptions.searchQuery"
         type="text"
-        placeholder="Pesquise pelo hotel"
+        placeholder="Pesquise por localização"
         class="bg-slate-200 w-full"
-        :showLabel="false"
-        labelText="pesquisar por hotel"
+        :show-label="false"
+        label-text="pesquisar por localização"
         @click="showOptions"
       />
-      <button type="submit" class="hidden">pesquisar</button>
+      <BButton
+        button-text="Pesquisar"
+        type="submit"
+        color="primary"
+        class="hidden"
+      />
+
       <div v-if="isShowingOptions" class="bg-white flex w-full">
         <BInput
           v-model="searchOptions.checkInDate"
           type="date"
-          :showLabel="true"
-          labelText="Check-in"
+          :show-label="true"
+          label-text="Check-in"
           class="w-full"
         />
         <BInput
           v-model="searchOptions.checkOutDate"
           type="date"
-          :showLabel="true"
-          labelText="Check-out"
+          :show-label="true"
+          label-text="Check-out"
           class="w-full"
         />
         <BInput
           v-model="searchOptions.rooms"
           type="number"
-          :showLabel="true"
-          labelText="Quartos"
+          :show-label="true"
+          label-text="Quartos"
           placeholder="Numero de quartos"
           class="w-full"
         />
         <BInput
           v-model="searchOptions.accommodates"
           type="number"
-          :showLabel="true"
-          labelText="Hospedes"
+          :show-label="true"
+          label-text="Hospedes"
           placeholder="Numero de hospedes"
           class="w-full"
         />
@@ -54,7 +60,9 @@
 
 <script setup lang="ts">
 import { ref, Ref, onMounted, onUnmounted } from 'vue';
-import BInput from '../baseComponents/BInput.vue';
+import BButton from '@/components/baseComponents/BButton.vue';
+import BInput from '@/components/baseComponents/BInput.vue';
+import useHotelStore from '@/stores/hotel';
 
 type SearchOptions = {
   searchQuery: string;
@@ -78,9 +86,9 @@ const formSearchHotelsRef = ref<HTMLFormElement | null>(null);
 const showOptions = () => {
   isShowingOptions.value = true;
 };
-
+const hotelStore = useHotelStore();
 const searchHotels = () => {
-  console.log('Buscar por:', searchOptions.value);
+  hotelStore.searchHotels(searchOptions.value);
 };
 
 const handleClickOutside = (event: MouseEvent) => {
