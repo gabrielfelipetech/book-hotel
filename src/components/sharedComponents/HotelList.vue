@@ -2,34 +2,82 @@
   <div class="container-list-hotel">
     <div class="list-hotel">
       <h1>{{ title }}</h1>
-      <GeneralFilter class="self-end" />
-      <ul v-if="!loading" class="hotels">
-        <li v-for="cardHotel in hotels" :key="cardHotel.id">
-          <CardHotel :card-hotel="cardHotel" />
-        </li>
-      </ul>
-      <div v-if="loading">Carregando...</div>
+      <BSelect
+        class="self-end"
+        :options="options"
+        @update:selected="handleSelectionFilter"
+      />
+      <p v-if="loading">Carregando...</p>
+      <div v-else class="w-full">
+        <BButton
+          v-if="cardHotelsSelectedForCompare.length"
+          button-text="Comparar"
+          color="primary"
+          @click="compareHotels"
+        />
+        <CardListHotel
+          class="mt-4"
+          :is-comparable="isComparable"
+          :card-hotels="cardHotels"
+          @emitCardHotelsSelectedForCompare="receiveCardHotelsSelected($event)"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineProps, onMounted } from 'vue';
-import useHotelStore from '@/stores/hotel';
+import { computed, defineProps, ref, watch } from 'vue';
 import { storeToRefs } from 'pinia';
-import CardHotel from './CardHotel.vue';
-import GeneralFilter from './GeneralFilter.vue';
+import useHotelStore from '@/stores/hotel';
+import BButton from '@/components/baseComponents/BButton.vue';
+import { useRoute } from 'vue-router';
+import { Hotel } from '@/stores/hotel/types';
+import BSelect from '@/components/baseComponents/BSelect.vue';
+import CardListHotel from './CardListHotel.vue';
+
+const route = useRoute();
+const options = computed(() => [
+  { name: 'Mais barato', value: 'cheapest' },
+  { name: 'Menos relevante', value: 'least_relevant' },
+  { name: 'Menos quartos', value: 'least_rooms' },
+]);
 
 defineProps({
   title: { type: String, default: 'Lista de Hotéis' },
+  isComparable: { type: Boolean, default: false, required: true },
+  hotelsType: {
+    type: String,
+    required: true,
+    validator: (value: string) =>
+      ['total', 'reserved', 'compared'].includes(value),
+  },
 });
 
 const hotelStore = useHotelStore();
-const { hotels, loading } = storeToRefs(hotelStore);
-
-onMounted(() => {
-  hotelStore.getHotels();
-});
+const cardHotels = ref<Hotel[]>([]);
+const cardHotelsSelectedForCompare = ref<Hotel[]>([]);
+const { loading, allRefinedHotels } = storeToRefs(hotelStore);
+const compareHotels = () => {
+  cardHotels.value = [...cardHotelsSelectedForCompare.value];
+};
+const receiveCardHotelsSelected = (valueEmitted: any) => {
+  cardHotelsSelectedForCompare.value =
+    valueEmitted.cardHotelsSelectedForCompare;
+  if (!valueEmitted.cardHotelsSelectedForCompare.length) {
+    cardHotels.value = allRefinedHotels.value;
+  }
+};
+const handleSelectionFilter = (value: string) => {
+  const isReservedContext = route.name === 'ReservedHotels';
+  hotelStore.filterHotels(value, isReservedContext);
+};
+watch(
+  () => allRefinedHotels.value,
+  (newRefinedHotels) => {
+    cardHotels.value = newRefinedHotels;
+  },
+);
 </script>
 
 <style scoped lang="scss">
