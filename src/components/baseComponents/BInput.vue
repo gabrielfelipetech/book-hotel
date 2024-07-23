@@ -8,8 +8,8 @@
     <input
       :id="labelText"
       v-model="inputValue"
-      @input="emitValue"
       v-bind="$attrs"
+      @input="emitValue"
     />
   </div>
 </template>
